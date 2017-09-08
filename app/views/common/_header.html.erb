@@ -1,0 +1,15 @@
+<h1><%= link_to 'logo.png', root_path %></h1>
+<% if user_signed_in? %>
+  <ul>
+    <li>投稿する</li>
+    <ul>
+      <li><%= link_to 'マイページ', user_path(current_user) %></li>
+      <li><%= link_to 'プロフィール編集', edit_user_path(current_user) %></li>
+      <li><%= link_to 'ログアウト', destroy_user_session_path, method::delete %></li>
+    </ul>
+  </ul>
+<% else %>
+  <ul>
+    <li><%= link_to 'ログイン', new_user_session_path %></li>
+  </ul>
+<% end %>
