@@ -8,4 +8,5 @@ class User < ActiveRecord::Base
   has_many :notes
   has_many :comments
   belongs_to :affiliation
+  has_many :subjects, through: :users_subjects
 end
