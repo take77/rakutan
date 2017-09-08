@@ -1,3 +1,9 @@
+class CustomFailure < Devise::FailureApp
+  def redirect_url
+    new_user_registration_path
+  end
+end
+
 # Use this hook to configure devise mailer, warden hooks and so forth.
 # Many of these configuration options can be set straight in your model.
 Devise.setup do |config|
@@ -8,6 +14,9 @@ Devise.setup do |config|
   # by default. You can change it below and use your own secret key.
   # config.secret_key = '90c2d01aefcf765a1fb88eeb54f11ddf37b9212aa9aab759f70d4f5d90cafcb4f78a9bc9067a41d902680a492e05c420cf05eec8000537203c6f38408c24c4b3'
 
+  config.warden do |manager|
+    manager.failure_app = CustomFailure
+  end
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
