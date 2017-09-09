@@ -1,15 +1,54 @@
-<h1><%= link_to 'logo.png', root_path %></h1>
 <% if user_signed_in? %>
-  <ul>
-    <li>投稿する</li>
-    <ul>
-      <li><%= link_to 'マイページ', user_path(current_user) %></li>
-      <li><%= link_to 'プロフィール編集', edit_user_path(current_user) %></li>
-      <li><%= link_to 'ログアウト', destroy_user_session_path, method::delete %></li>
-    </ul>
-  </ul>
+<nav class="navbar navbar-default">
+         <h1 class="text-center"><%= link_to '楽単', root_path %></h1>
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#">投稿する</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">マイページ</a></li>
+            <li><a href="#">プロフィール編集</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">ログアウト</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
 <% else %>
-  <ul>
-    <li><%= link_to 'ログイン', new_user_session_path %></li>
-  </ul>
+<nav class="navbar navbar-default">
+         <h1 class="text-center"><%= link_to '楽単', root_path %></h1>
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#">ログイン</a></li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
 <% end %>
