@@ -1,3 +1,11 @@
+<div class="container">
+  <div class="col-md-8 text-center">
+    <h1>これで全てが「楽単」になる</h1>
+    <p>過去問、レポート、授業ノートをみんなで共有。<br>もう大学に怯えるな！</p>
+  </div>
+
+<div class="col-md-4">
+<div class="text-center">
 <h2>新規登録</h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
@@ -5,7 +13,7 @@
 
   <div class="field">
     <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
+    <%= f.email_field :email, autofocus: true, placeholder: 'メールアドレス', class: 'input form-control' %>
   </div>
 
   <div class="field">
@@ -13,17 +21,36 @@
     <% if @minimum_password_length %>
     <em>(<%= @minimum_password_length %> characters minimum)</em>
     <% end %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
+    <%= f.password_field :password, autocomplete: "off", placeholder: 'パスワード', class: 'input form-control' %>
   </div>
 
   <div class="field">
     <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
+    <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: 'パスワード（確認）', class: 'input form-control' %>
   </div>
 
   <div class="actions">
-    <%= f.submit "Sign up" %>
+    <%= f.submit class: 'btn btn-primary withripple' "サインアップ" %>
   </div>
 <% end %>
 
 <%= render "devise/shared/links" %>
+</div>
+</div>
+
+<div class="col-md-4">
+  <h3>過去問・レポートを大公開！</h3>
+  <p>過酷な大学生活を乗り組むため、サークルや部活の先輩を頼っているそこのあなた！「楽単」なら、全国から投稿された過去問・レポートが見放題！もう苦労して情報集めに奔走する必要はありません！！</p>
+</div>
+
+<div class="col-md-4">
+<h3>コメントで情報交換！</h3>
+  <p>「過去問があっても答えがない」「レポートの評価軸がわからない」、そんなあなたも大丈夫！各ページのコメント欄で情報交換すれば、すぐに問題解決！全国の大学生が協力すれば、怖いものなしです！！</p>
+</div>
+
+<div class="col-md-4">
+  <h3>授業ノートもみんなで活用！</h3>
+  <P>だって大学生だもの、どうしても授業にいけない日だってあるよね♪　そんな時は誰かにノートを見せてもらおう！きっと真面目な誰かがあなたにノートを見せてくれます！</P>
+</div>
+
+</div>
