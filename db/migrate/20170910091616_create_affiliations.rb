@@ -1,10 +1,8 @@
 class CreateAffiliations < ActiveRecord::Migration
   def change
     create_table :affiliations do |t|
-      t.text :college
-      t.text :department
-      t.text :subject
-      t.text :teacher
+      t.string :college, default: '', null: false
+      t.string :department, default: '', null: false
       t.timestamps null: false
     end
   end

@@ -11,14 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170910071932) do
+ActiveRecord::Schema.define(version: 20170910095432) do
 
   create_table "affiliations", force: :cascade do |t|
-    t.text     "college",    limit: 65535
-    t.text     "department", limit: 65535
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.string   "college",    limit: 255, default: "", null: false
+    t.string   "department", limit: 255, default: "", null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.string   "course",     limit: 255, default: ""
   end
+
+  add_index "affiliations", ["college", "department"], name: "affiliation_unique", unique: true, using: :btree
 
   create_table "exam_comments", force: :cascade do |t|
     t.text     "text",       limit: 65535
