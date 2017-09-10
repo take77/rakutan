@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170908075257) do
+ActiveRecord::Schema.define(version: 20170910071932) do
 
   create_table "affiliations", force: :cascade do |t|
     t.text     "college",    limit: 65535
@@ -20,10 +20,12 @@ ActiveRecord::Schema.define(version: 20170908075257) do
     t.datetime "updated_at",               null: false
   end
 
-  create_table "comments", force: :cascade do |t|
+  create_table "exam_comments", force: :cascade do |t|
     t.text     "text",       limit: 65535
     t.integer  "parent_id",  limit: 4
     t.integer  "rate",       limit: 4
+    t.integer  "exams_id",   limit: 4
+    t.integer  "user_id",    limit: 4
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
   end
@@ -36,12 +38,32 @@ ActiveRecord::Schema.define(version: 20170908075257) do
     t.datetime "updated_at",                null: false
   end
 
+  create_table "note_comments", force: :cascade do |t|
+    t.text     "text",       limit: 65535
+    t.integer  "parent_id",  limit: 4
+    t.integer  "rate",       limit: 4
+    t.integer  "exams_id",   limit: 4
+    t.integer  "user_id",    limit: 4
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
   create_table "notes", force: :cascade do |t|
     t.text     "image",       limit: 65535
     t.integer  "year",        limit: 4
     t.integer  "explanation", limit: 4
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
+  end
+
+  create_table "report_comments", force: :cascade do |t|
+    t.text     "text",       limit: 65535
+    t.integer  "parent_id",  limit: 4
+    t.integer  "rate",       limit: 4
+    t.integer  "exams_id",   limit: 4
+    t.integer  "user_id",    limit: 4
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
   end
 
   create_table "reports", force: :cascade do |t|
@@ -76,9 +98,11 @@ ActiveRecord::Schema.define(version: 20170908075257) do
     t.string   "unconfirmed_email",      limit: 255
     t.datetime "created_at",                                      null: false
     t.datetime "updated_at",                                      null: false
+    t.integer  "affiliation_id",         limit: 4
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["email"], name: "unique_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "users_subjects", force: :cascade do |t|

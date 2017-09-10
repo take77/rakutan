@@ -48,5 +48,6 @@ group :development do
   gem 'kaminari'
   gem 'paperclip'
   gem 'bootstrap-sass', '~> 3.3.6'
+  gem 'twitter-bootstrap-rails'
 end
 

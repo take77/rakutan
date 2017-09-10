@@ -1,6 +1,6 @@
 <% if user_signed_in? %>
+<h1 class="text-center"><%= link_to '楽単', root_path %></h1>
 <nav class="navbar navbar-default">
-         <h1 class="text-center"><%= link_to '楽単', root_path %></h1>
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -15,14 +15,21 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">投稿する</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> 投稿する <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><%= link_to '過去問', "/exams/new" %></li>
+            <li><%= link_to 'レポート', "/reports/new" %></li>
+            <li><%= link_to '授業ノート', "/notes/new" %></li>
+          </ul>
+        </li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="#">マイページ</a></li>
             <li><a href="#">プロフィール編集</a></li>
             <li role="separator" class="divider"></li>
-            <li><a href="#">ログアウト</a></li>
+            <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %></a></li>
           </ul>
         </li>
       </ul>

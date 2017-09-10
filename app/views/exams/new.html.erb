@@ -1,0 +1,8 @@
+<div class="container">
+  <%= form_tag('/news', method: :post) do %>
+    <h3>投稿する</h3>
+    <input placeholder="タイトル" type="text" name="title">
+    <input placeholder="実施年度" type="text" name="year">
+    <textarea cols="30" name="コメント" placeholder="text" rows="10"></textarea>
+    <input type="submit" value="投稿">
+  <% end %>
