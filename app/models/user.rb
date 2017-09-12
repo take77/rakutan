@@ -6,7 +6,9 @@ class User < ActiveRecord::Base
   has_many :exams
   has_many :reports
   has_many :notes
-  has_many :comments
+  has_many :exam_comments
+  has_many :report_comments
+  has_many :notes_comments
   belongs_to :affiliation
-  has_many :subjects, through: :users_subjects
+  has_many :subjects, through: :user_subjects
 end
