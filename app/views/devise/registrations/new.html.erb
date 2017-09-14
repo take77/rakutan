@@ -28,9 +28,13 @@
     <%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: 'パスワード（確認）', class: 'input form-control' %>
   </div>
+  <div>
+    <%= f.hidden_field :affiliation_id, value: 1 %>
+  </div>
 
   <div class="actions">
     <%= f.submit class: 'btn btn-primary withripple' "サインアップ" %>
+
   </div>
 <% end %>
 
@@ -40,7 +44,7 @@
 
 <div class="col-md-4">
   <h3>過去問・レポートを大公開！</h3>
-  <p>過酷な大学生活を乗り組むため、サークルや部活の先輩を頼っているそこのあなた！「楽単」なら、全国から投稿された過去問・レポートが見放題！もう苦労して情報集めに奔走する必要はありません！！</p>
+  <p>過酷な大学生活を乗り超えるむため、サークルや部活の先輩を頼っているそこのあなた！「楽単」なら、全国から投稿された過去問・レポートが見放題！もう苦労して情報集めに奔走する必要はありません！！</p>
 </div>
 
 <div class="col-md-4">

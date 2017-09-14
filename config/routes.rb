@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   resources :exams, only: [:new, :create]
   resources :reports, only: [:new, :create]
   resources :notes, only: [:new, :create]
+  resources :affiliations, only: [:new, :create]
 end
