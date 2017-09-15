@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
   protected
   def configue_permitted_params
     devise_parameter_sanitizer.permit(:sign_up){
-      |u| u.permit(:email, :password, :affiliation_id)
+      |u| u.permit(:email, :password, :affiliation_id, :nickname)
     }
   end
 end
