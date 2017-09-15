@@ -1,4 +1,9 @@
 <% if user_signed_in? %>
+
+<% if current_user.affiliation_id == 1 %>
+  <h1 class="text-center"><%= link_to '楽単', root_path %></h1>
+
+<% else %>
 <h1 class="text-center"><%= link_to '楽単', root_path %></h1>
 <nav class="navbar navbar-default">
   <div class="container-fluid">
@@ -11,7 +16,6 @@
         <span class="icon-bar"></span>
       </button>
     </div>
-
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
@@ -36,6 +40,8 @@
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
+<% end %>
+
 <% else %>
 <nav class="navbar navbar-default">
   <h1 class="text-center"><%= link_to '楽単', root_path %></h1>
