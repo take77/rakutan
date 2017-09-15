@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170912095115) do
+ActiveRecord::Schema.define(version: 20170915084254) do
 
   create_table "affiliations", force: :cascade do |t|
     t.string   "college",    limit: 255, default: "", null: false
@@ -96,6 +96,8 @@ ActiveRecord::Schema.define(version: 20170912095115) do
     t.datetime "created_at",                              null: false
     t.datetime "updated_at",                              null: false
   end
+
+  add_index "subjects", ["professor", "name", "affiliation_id"], name: "subjects_unique", unique: true, using: :btree
 
   create_table "user_subjects", force: :cascade do |t|
     t.integer  "user_id",    limit: 4, null: false
