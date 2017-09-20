@@ -1,8 +1,95 @@
-<div class="container">
-  <%= form_tag('/news', method: :post) do %>
-    <h3>投稿する</h3>
-    <input placeholder="タイトル" type="text" name="title">
-    <input placeholder="実施年度" type="text" name="year">
-    <textarea cols="30" name="コメント" placeholder="text" rows="10"></textarea>
-    <input type="submit" value="投稿">
-  <% end %>
+<script type="text/javascript">
+function checkdiv( obj,id ) {
+if( obj.checked ){
+document.getElementById(id).style.display = "block";
+}
+else {
+document.getElementById(id).style.display = "none";
+}
+}
+</script>
+
+<div class="row form">
+  <div class="col-lg-12">
+    <%= form_for @exam do |f| %>
+      <h2 class="text-center">投稿フォーム（過去問）</h2>
+
+      <div class="form-group">
+        <div class="col-lg-6">
+          <%= f.text_field :title, placeholder: "タイトル", class: "form-control" %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-lg-6">
+          <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+            <h4 class="text-center">試験実施日</h4>
+          </div>
+          <%= f.date_select :taken_date, {use_month_numbers: true}, {class: "form-control bootstrap-date"} %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-lg-6">
+          <%= f.file_field :file, placeholder: "ファイルを選択してください" %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-lg-6">
+          <%= f.text_field :explanation, placeholder: "コメントや補足説明などがあれば、記入してください", class: "form-control" %>
+        </div>
+      </div>
+
+      <%= fields_for @subject do |g| %>
+
+        <div class="form-group">
+          <div class="col-lg-6">
+            <%= g.text_field :name, placeholder: "科目名", class: "form-control" %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-lg-6">
+            <%= g.text_field :professor, placeholder: "担当教授名", class: "form-control" %>
+          </div>
+        </div>
+
+      <% end %>
+
+      <div class="checkbox text-center">
+        <label for="checkbox">
+          <input type="checkbox" name="checkbox_return" value = "1", id="checkbox" onclick="checkdiv(this,'Affiliation_form')" />自分の所属する学科の科目でない場合はチェックを入れてください
+        </label>
+      </div>
+
+      <div id="Affiliation_form" style="display:none;">
+      <%= fields_for @affiliation do |h| %>
+
+        <div class="form-group">
+          <div class="col-lg-6">
+            <%= h.text_field :college, placeholder: "大学名", class: "form-control", value: current_user.affiliation.college %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-lg-6">
+            <%= h.text_field :department, placeholder: "学部名", class: "form-control", value: current_user.affiliation.department %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-lg-6">
+            <%= h.text_field :course, placeholder: "学科名（ない場合は空欄のままで構いません）", class: "form-control", value: current_user.affiliation.course %>
+          </div>
+        </div>
+
+      <% end %>
+    </div>
+
+      <div class="form-group text-center">
+        <%= f.submit "送信", class: "btn btn-primary withripple" %>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -4,10 +4,23 @@ class AffiliationsController < ApplicationController
     @affiliation = Affiliation.new
   end
 
-  def create
-    affiliation = Affiliation.where(:college => params[:college], :department => params[:department], :course => params[:course]).first_or_create(create_params)
+ def create
+    affiliation = Affiliation.create(create_params)
+    if affiliation.save
+      update(affiliation)
+    else
+      new_affiliation = already_exists(affiliation)
+      update(new_affiliation)
+    end
+    redirect_to root_path
+  end
+
+  def update(affiliation)
     current_user.update_attributes(affiliation_id: affiliation.id)
-    redirect_to controller: :top, action: :index
+  end
+
+  def already_exists(affiliation)
+    affiliation = Affiliation.find_by(:college => affiliation.college, :department => affiliation.department, :course => affiliation.course)
   end
 
   private

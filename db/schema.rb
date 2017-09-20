@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170915084254) do
+ActiveRecord::Schema.define(version: 20170920045425) do
 
   create_table "affiliations", force: :cascade do |t|
     t.string   "college",    limit: 255, default: "", null: false
@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(version: 20170915084254) do
   end
 
   create_table "exams", force: :cascade do |t|
-    t.string   "image",          limit: 255,                null: false
+    t.string   "file",           limit: 255,                null: false
     t.date     "taken_date",                                null: false
     t.text     "explanation",    limit: 65535
     t.integer  "subject_id",     limit: 4,                  null: false
@@ -43,6 +43,14 @@ ActiveRecord::Schema.define(version: 20170915084254) do
     t.string   "title",          limit: 255,   default: "", null: false
     t.datetime "created_at",                                null: false
     t.datetime "updated_at",                                null: false
+  end
+
+  create_table "feed_contents", force: :cascade do |t|
+    t.integer  "content_id",     limit: 4
+    t.string   "content_type",   limit: 255
+    t.integer  "affiliation_id", limit: 4,   null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
 
   create_table "note_comments", force: :cascade do |t|
@@ -57,7 +65,7 @@ ActiveRecord::Schema.define(version: 20170915084254) do
   end
 
   create_table "notes", force: :cascade do |t|
-    t.string   "image",          limit: 255,                null: false
+    t.string   "file",           limit: 255,                null: false
     t.date     "taken_date",                                null: false
     t.string   "title",          limit: 255,   default: "", null: false
     t.text     "explanation",    limit: 65535
@@ -79,7 +87,7 @@ ActiveRecord::Schema.define(version: 20170915084254) do
   end
 
   create_table "reports", force: :cascade do |t|
-    t.string   "image",          limit: 255,                null: false
+    t.string   "file",           limit: 255,                null: false
     t.date     "deadline",                                  null: false
     t.string   "title",          limit: 255,   default: "", null: false
     t.text     "explanation",    limit: 65535
@@ -98,6 +106,13 @@ ActiveRecord::Schema.define(version: 20170915084254) do
   end
 
   add_index "subjects", ["professor", "name", "affiliation_id"], name: "subjects_unique", unique: true, using: :btree
+
+  create_table "upload_files", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.string   "file",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
 
   create_table "user_subjects", force: :cascade do |t|
     t.integer  "user_id",    limit: 4, null: false
@@ -124,8 +139,8 @@ ActiveRecord::Schema.define(version: 20170915084254) do
     t.datetime "created_at",                                      null: false
     t.datetime "updated_at",                                      null: false
     t.string   "avatar",                 limit: 255, default: ""
-    t.integer  "affiliation_id",         limit: 4,                null: false
     t.string   "nickname",               limit: 255, default: "", null: false
+    t.integer  "affiliation_id",         limit: 4,                null: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

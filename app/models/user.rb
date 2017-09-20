@@ -12,4 +12,6 @@ class User < ActiveRecord::Base
   has_many :notes_comments
   belongs_to :affiliation
   has_many :subjects, through: :user_subjects
+  validates :email, uniqueness: true
+  validates :nickname, uniqueness: true
 end

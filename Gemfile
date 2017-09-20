@@ -49,5 +49,7 @@ group :development do
   gem 'paperclip'
   gem 'bootstrap-sass', '~> 3.3.6'
   gem 'twitter-bootstrap-rails'
+  gem 'carrierwave'
+  gem 'therubyracer'
 end
 
