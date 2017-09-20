@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170920045425) do
+ActiveRecord::Schema.define(version: 20170920082955) do
 
   create_table "affiliations", force: :cascade do |t|
     t.string   "college",    limit: 255, default: "", null: false
@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(version: 20170920045425) do
     t.integer  "affiliation_id", limit: 4,   null: false
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
+    t.integer  "subject_id",     limit: 4,   null: false
   end
 
   create_table "note_comments", force: :cascade do |t|
