@@ -1,0 +1,17 @@
+<div class="container">
+  <div class="row">
+    <h2 class="text-center"><%= @exam.title %></h2>
+    <ul class="list-inline text-center">
+      <li>投稿者名：<%= @exam.user.nickname %></li>
+      <li>投稿日時：<%= @exam.created_at%></li>
+      <li>分類：過去問</li>
+      <li>科目名：<%= @exam.subject.name %></li>
+      <li>試験実施日：<%= @exam.taken_date %>
+      <li>担当教授名：<%= @exam.subject.professor %></li>
+    </ul>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <%= image_tag @exam.file_url(:thumb).to_s, {class: "img-responsive center-block"} %>
+      <p class="well custom-space"><%= @exam.explanation %></p>
+    </div>
+  </div>
+</div>

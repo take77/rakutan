@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170920082955) do
+ActiveRecord::Schema.define(version: 20170921184650) do
 
   create_table "affiliations", force: :cascade do |t|
     t.string   "college",    limit: 255, default: "", null: false
@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(version: 20170920082955) do
   end
 
   create_table "exams", force: :cascade do |t|
-    t.string   "file",           limit: 255,                null: false
+    t.binary   "file",           limit: 65535,              null: false
     t.date     "taken_date",                                null: false
     t.text     "explanation",    limit: 65535
     t.integer  "subject_id",     limit: 4,                  null: false
@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(version: 20170920082955) do
     t.string   "title",          limit: 255,   default: "", null: false
     t.datetime "created_at",                                null: false
     t.datetime "updated_at",                                null: false
+    t.integer  "user_id",        limit: 4,                  null: false
   end
 
   create_table "feed_contents", force: :cascade do |t|
@@ -52,6 +53,7 @@ ActiveRecord::Schema.define(version: 20170920082955) do
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
     t.integer  "subject_id",     limit: 4,   null: false
+    t.integer  "user_id",        limit: 4
   end
 
   create_table "note_comments", force: :cascade do |t|
@@ -66,7 +68,7 @@ ActiveRecord::Schema.define(version: 20170920082955) do
   end
 
   create_table "notes", force: :cascade do |t|
-    t.string   "file",           limit: 255,                null: false
+    t.binary   "file",           limit: 65535,              null: false
     t.date     "taken_date",                                null: false
     t.string   "title",          limit: 255,   default: "", null: false
     t.text     "explanation",    limit: 65535
@@ -74,6 +76,7 @@ ActiveRecord::Schema.define(version: 20170920082955) do
     t.integer  "affiliation_id", limit: 4,                  null: false
     t.datetime "created_at",                                null: false
     t.datetime "updated_at",                                null: false
+    t.integer  "user_id",        limit: 4,                  null: false
   end
 
   create_table "report_comments", force: :cascade do |t|
@@ -88,7 +91,7 @@ ActiveRecord::Schema.define(version: 20170920082955) do
   end
 
   create_table "reports", force: :cascade do |t|
-    t.string   "file",           limit: 255,                null: false
+    t.binary   "file",           limit: 65535,              null: false
     t.date     "deadline",                                  null: false
     t.string   "title",          limit: 255,   default: "", null: false
     t.text     "explanation",    limit: 65535
@@ -96,6 +99,7 @@ ActiveRecord::Schema.define(version: 20170920082955) do
     t.integer  "affiliation_id", limit: 4,                  null: false
     t.datetime "created_at",                                null: false
     t.datetime "updated_at",                                null: false
+    t.integer  "user_id",        limit: 4,                  null: false
   end
 
   create_table "subjects", force: :cascade do |t|

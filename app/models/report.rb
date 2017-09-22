@@ -9,6 +9,6 @@ class Report < ActiveRecord::Base
 
   private
     def create_feed_content
-      self.feed_content = FeedContent.create(affiliation_id: affiliation_id, subject_id: subject_id, updated_at: updated_at)
+      self.feed_content = FeedContent.create(affiliation_id: affiliation_id, subject_id: subject_id, user_id: user_id, updated_at: updated_at)
     end
 end

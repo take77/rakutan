@@ -5,4 +5,5 @@ class Subject < ActiveRecord::Base
   has_many :users, through: :user_subjects
   belongs_to :affiliation, required: true
   validates :professor, uniqueness:{scope: [:name, :affiliation_id]}
+  has_many :feed_contents
 end

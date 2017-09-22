@@ -35,7 +35,12 @@ class ReportsController < ApplicationController
     report = Report.new(report_create_params)
     report.affiliation_id = new_affiliation.id
     report.subject_id = new_subject.id
+    report.user_id = current_user.id
     report.save
+  end
+
+  def show
+    @report = Report.find(params[:id])
   end
 
   def affiliation_already_exists(affiliation)

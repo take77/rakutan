@@ -1,0 +1,28 @@
+<div class="col-lg-12">
+  <div class="row">
+    <div class="panel panel-info">
+      <div class="panel-heading clearfix">
+        <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9 text-left">
+          <h5 class="panel-title"><%= link_to exam.title, exam %></h5>
+        </div>
+        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 text-right">
+          <time><%= time_ago_in_words exam.updated_at %>前</time>
+        </div>
+      </div>
+      <div class="panel-body">
+        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 text-left">
+          分類：過去問
+        </div>
+        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 text-center">
+          科目名：<%= exam.subject.name %>
+        </div>
+        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 text-right">
+          担当教授名：<%= exam.subject.professor %>
+        </div>
+        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 text-right">
+          投稿者：<%= exam.user.nickname %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

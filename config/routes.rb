@@ -9,8 +9,9 @@ Rails.application.routes.draw do
 
   devise_for :users
   root to: "top#index"
-  resources :exams, only: [:new, :create]
-  resources :reports, only: [:new, :create]
-  resources :notes, only: [:new, :create]
+  resources :exams, only: [:new, :create, :show]
+  resources :reports, only: [:new, :create, :show]
+  resources :notes, only: [:new, :create,:show]
   resources :affiliations, only: [:new, :create]
+  resources :users, only:[:show]
 end

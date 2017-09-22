@@ -6755,3 +6755,8 @@ button.close {
   }
 }
 /*# sourceMappingURL=bootstrap.css.map */
+
+.custom-space{
+  margin-bottom: 10px;
+  margin-top: 10px;
+}

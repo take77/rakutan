@@ -51,5 +51,7 @@ group :development do
   gem 'twitter-bootstrap-rails'
   gem 'carrierwave'
   gem 'therubyracer'
+  gem 'rmagick'
+  gem 'rghost'
 end
 

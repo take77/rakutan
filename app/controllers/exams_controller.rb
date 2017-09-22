@@ -35,7 +35,12 @@ class ExamsController < ApplicationController
     exam = Exam.new(exam_create_params)
     exam.affiliation_id = new_affiliation.id
     exam.subject_id = new_subject.id
+    exam.user_id = current_user.id
     exam.save
+  end
+
+  def show
+    @exam = Exam.find(params[:id])
   end
 
   def affiliation_already_exists(affiliation)

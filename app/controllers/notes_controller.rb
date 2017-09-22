@@ -35,7 +35,12 @@ class NotesController < ApplicationController
     note = Note.new(note_create_params)
     note.affiliation_id = new_affiliation.id
     note.subject_id = new_subject.id
+    note.user_id = current_user.id
     note.save
+  end
+
+  def show
+    @note = Note.find(params[:id])
   end
 
   def affiliation_already_exists(affiliation)
