@@ -10,7 +10,7 @@
       <li>担当教授名：<%= @note.subject.professor %></li>
     </ul>
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-      <%= image_tag @note.file_url(:thumb).to_s, {class: "img-responsive center-block"} %>
+      <%= image_tag @item.file_url(:thumb).to_s, {class: "img-responsive center-block"} %>
       <p class="well custom-space"><%= @note.explanation %></p>
     </div>
   </div>

@@ -10,8 +10,10 @@ class User < ActiveRecord::Base
   has_many :exam_comments
   has_many :report_comments
   has_many :notes_comments
+  has_many :items
   belongs_to :affiliation
   has_many :subjects, through: :user_subjects
+  accepts_nested_attributes_for :items
   validates :email, uniqueness: true
   validates :nickname, uniqueness: true
 end

@@ -41,6 +41,7 @@ class ReportsController < ApplicationController
 
   def show
     @report = Report.find(params[:id])
+    @item = Item.find_by(report_id: @report.id)
   end
 
   def affiliation_already_exists(affiliation)
@@ -61,7 +62,8 @@ class ReportsController < ApplicationController
   end
 
   def report_create_params
-    params.require(:report).permit(:title, :file, :deadline, :explanation, :affiliation_id, :subject_id)
+    params.require(:report).permit(:title, :taken_date, :explanation, :affiliation_id, :subject_id,
+        items_attributes:[:file, :note_id, :exam_id, :user_id])
   end
 
 end

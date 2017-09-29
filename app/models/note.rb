@@ -3,8 +3,9 @@ class Note < ActiveRecord::Base
   belongs_to :subject
   belongs_to :affiliation
   has_many :note_comments
-  mount_uploader :file, FileUploader
+  has_many :items
   has_one :feed_content, as: :content, dependent: :destroy
+  accepts_nested_attributes_for :items, allow_destroy: true
   after_create :create_feed_content
 
   private

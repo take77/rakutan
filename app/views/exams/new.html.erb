@@ -1,14 +1,3 @@
-<script type="text/javascript">
-function checkdiv( obj,id ) {
-if( obj.checked ){
-document.getElementById(id).style.display = "block";
-}
-else {
-document.getElementById(id).style.display = "none";
-}
-}
-</script>
-
 <div class="row form">
   <div class="col-lg-12">
     <%= form_for @exam do |f| %>
@@ -29,11 +18,13 @@ document.getElementById(id).style.display = "none";
         </div>
       </div>
 
-      <div class="form-group">
-        <div class="col-lg-6">
-          <%= f.file_field :file, placeholder: "ファイルを選択してください" %>
-        </div>
+      <div id="item_fields">
+        <%= f.fields_for :items do |i| %>
+          <%= render 'item_fields', f: i %>
+        <% end %>
       </div>
+
+      <%= link_to_add_association "ファイルを追加", f, :items, class:"btn btn-primary", data:{association_insertion_node: "#item_fields", association_insertion_method: "append"}, partial: "item_fields" %>
 
       <div class="form-group">
         <div class="col-lg-6">
@@ -41,17 +32,17 @@ document.getElementById(id).style.display = "none";
         </div>
       </div>
 
-      <%= fields_for @subject do |g| %>
+      <%= fields_for @subject do |s| %>
 
         <div class="form-group">
           <div class="col-lg-6">
-            <%= g.text_field :name, placeholder: "科目名", class: "form-control" %>
+            <%= s.text_field :name, placeholder: "科目名", class: "form-control" %>
           </div>
         </div>
 
         <div class="form-group">
           <div class="col-lg-6">
-            <%= g.text_field :professor, placeholder: "担当教授名", class: "form-control" %>
+            <%= s.text_field :professor, placeholder: "担当教授名", class: "form-control" %>
           </div>
         </div>
 
@@ -64,23 +55,23 @@ document.getElementById(id).style.display = "none";
       </div>
 
       <div id="Affiliation_form" style="display:none;">
-      <%= fields_for @affiliation do |h| %>
+      <%= fields_for @affiliation do |a| %>
 
         <div class="form-group">
           <div class="col-lg-6">
-            <%= h.text_field :college, placeholder: "大学名", class: "form-control", value: current_user.affiliation.college %>
+            <%= a.text_field :college, placeholder: "大学名", class: "form-control", value: current_user.affiliation.college %>
           </div>
         </div>
 
         <div class="form-group">
           <div class="col-lg-6">
-            <%= h.text_field :department, placeholder: "学部名", class: "form-control", value: current_user.affiliation.department %>
+            <%= a.text_field :department, placeholder: "学部名", class: "form-control", value: current_user.affiliation.department %>
           </div>
         </div>
 
         <div class="form-group">
           <div class="col-lg-6">
-            <%= h.text_field :course, placeholder: "学科名（ない場合は空欄のままで構いません）", class: "form-control", value: current_user.affiliation.course %>
+            <%= a.text_field :course, placeholder: "学科名（ない場合は空欄のままで構いません）", class: "form-control", value: current_user.affiliation.course %>
           </div>
         </div>
 
@@ -93,3 +84,16 @@ document.getElementById(id).style.display = "none";
     <% end %>
   </div>
 </div>
+
+<script type="text/javascript">
+
+function checkdiv( obj,id ) {
+if( obj.checked ){
+document.getElementById(id).style.display = "block";
+}
+else {
+document.getElementById(id).style.display = "none";
+}
+}
+
+</script>

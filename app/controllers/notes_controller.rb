@@ -41,6 +41,7 @@ class NotesController < ApplicationController
 
   def show
     @note = Note.find(params[:id])
+    @item = Item.find_by(note_id: @note.id)
   end
 
   def affiliation_already_exists(affiliation)
@@ -61,7 +62,8 @@ class NotesController < ApplicationController
   end
 
   def note_create_params
-    params.require(:note).permit(:title, :file, :taken_date, :explanation, :affiliation_id, :subject_id)
+    params.require(:note).permit(:title, :taken_date, :explanation, :affiliation_id, :subject_id,
+        items_attributes:[:file, :exam_id, :report_id, :user_id])
   end
 
 end

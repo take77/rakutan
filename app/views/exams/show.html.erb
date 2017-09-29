@@ -10,7 +10,7 @@
       <li>担当教授名：<%= @exam.subject.professor %></li>
     </ul>
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-      <%= image_tag @exam.file_url(:thumb).to_s, {class: "img-responsive center-block"} %>
+      <%= image_tag @item.file_url(:thumb).to_s, {class: "img-responsive center-block"} %>
       <p class="well custom-space"><%= @exam.explanation %></p>
     </div>
   </div>

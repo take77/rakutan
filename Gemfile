@@ -53,5 +53,6 @@ group :development do
   gem 'therubyracer'
   gem 'rmagick'
   gem 'rghost'
+  gem 'cocoon'
 end
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170921184650) do
+ActiveRecord::Schema.define(version: 20170923073245) do
 
   create_table "affiliations", force: :cascade do |t|
     t.string   "college",    limit: 255, default: "", null: false
@@ -35,7 +35,6 @@ ActiveRecord::Schema.define(version: 20170921184650) do
   end
 
   create_table "exams", force: :cascade do |t|
-    t.binary   "file",           limit: 65535,              null: false
     t.date     "taken_date",                                null: false
     t.text     "explanation",    limit: 65535
     t.integer  "subject_id",     limit: 4,                  null: false
@@ -56,6 +55,16 @@ ActiveRecord::Schema.define(version: 20170921184650) do
     t.integer  "user_id",        limit: 4
   end
 
+  create_table "items", force: :cascade do |t|
+    t.binary   "file",       limit: 65535, null: false
+    t.integer  "exam_id",    limit: 4,     null: false
+    t.integer  "report_id",  limit: 4,     null: false
+    t.integer  "note_id",    limit: 4,     null: false
+    t.integer  "user_id",    limit: 4,     null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
   create_table "note_comments", force: :cascade do |t|
     t.text     "text",       limit: 65535,             null: false
     t.integer  "parent_id",  limit: 4,                 null: false
@@ -68,7 +77,6 @@ ActiveRecord::Schema.define(version: 20170921184650) do
   end
 
   create_table "notes", force: :cascade do |t|
-    t.binary   "file",           limit: 65535,              null: false
     t.date     "taken_date",                                null: false
     t.string   "title",          limit: 255,   default: "", null: false
     t.text     "explanation",    limit: 65535
@@ -91,7 +99,6 @@ ActiveRecord::Schema.define(version: 20170921184650) do
   end
 
   create_table "reports", force: :cascade do |t|
-    t.binary   "file",           limit: 65535,              null: false
     t.date     "deadline",                                  null: false
     t.string   "title",          limit: 255,   default: "", null: false
     t.text     "explanation",    limit: 65535
@@ -111,13 +118,6 @@ ActiveRecord::Schema.define(version: 20170921184650) do
   end
 
   add_index "subjects", ["professor", "name", "affiliation_id"], name: "subjects_unique", unique: true, using: :btree
-
-  create_table "upload_files", force: :cascade do |t|
-    t.string   "name",       limit: 255
-    t.string   "file",       limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-  end
 
   create_table "user_subjects", force: :cascade do |t|
     t.integer  "user_id",    limit: 4, null: false
