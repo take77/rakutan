@@ -1,6 +1,7 @@
 <div class="container">
   <div class="row">
     <h2 class="text-center"><%= @note.title %></h2>
+
     <ul class="list-inline text-center">
       <li>投稿者名：<%= @note.user.nickname %></li>
       <li>投稿日時：<%= @note.created_at%></li>
@@ -9,9 +10,22 @@
       <li>授業実施日（もしくはノート作成日）：<%= @note.taken_date %></li>
       <li>担当教授名：<%= @note.subject.professor %></li>
     </ul>
+
+    <div>
+      <%= link_to 'お気に入りに追加', add_note_path(note), method: :post %>
+    </div>
+
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-      <%= image_tag @item.file_url(:thumb).to_s, {class: "img-responsive center-block"} %>
+
+      <% @note_items.each do |note_item| %>
+        <%= image_tag note_item.note_file_url(:thumb), {class: "img-responsive center-block"} %>
+        <%= link_to 'ダウンロード',  download_note_note_item_path(@note, note_item), method: :get, class:"btn btn-default btn-xs" %>
+      <% end %>
+
       <p class="well custom-space"><%= @note.explanation %></p>
     </div>
+
+    <%= render partial: '/common/comment', locals: {record_element: @note, parent_comment: @note_comment, child_comment: @note_comment, parent_comments: @note_parent_comments, child_comments: @note_child_comments } %>
+
   </div>
 </div>

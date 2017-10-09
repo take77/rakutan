@@ -1,0 +1,5 @@
+      <% @items.each do |item| %>
+        <%= item.id %>
+        <%= image_tag item.file_url(:thumb), {class: "img-responsive center-block"} %>
+        <%= link_to 'ダウンロード', download_item_path(item), method: :get, class:"btn btn-default btn-xs" %>
+      <% end %>

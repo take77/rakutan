@@ -1,11 +1,12 @@
 class Exam < ActiveRecord::Base
-  belongs_to :user
+  has_many :user, through: :clip_exams
+  has_many :clip_exams
   belongs_to :subject
   belongs_to :affiliation
-  has_many :exam_comments
-  has_many :items
+  has_many :exam_comments, dependent: :destroy
+  has_many :exam_items, dependent: :destroy
   has_one :feed_content, as: :content, dependent: :destroy
-  accepts_nested_attributes_for :items, allow_destroy: true
+  accepts_nested_attributes_for :exam_items, allow_destroy: true
   after_create :create_feed_content
 
   private

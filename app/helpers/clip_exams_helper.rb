@@ -1,0 +1,2 @@
+module ClipExamsHelper
+end

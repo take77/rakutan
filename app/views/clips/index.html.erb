@@ -1,0 +1,25 @@
+<div class="container">
+  <h2 class="text-center">お気に入り</h2>
+
+  <ul class="nav nav-tabs">
+    <li class="active"><a href="#all" data-toggle="tab">全て</a></li>
+    <li><a href="#exams" data-toggle="tab">過去問</a></li>
+    <li><a href="#reports" data-toggle="tab">レポート</a></li>
+    <li><a href="#notes" data-toggle="tab">授業ノート</a></li>
+  </ul>
+
+  <div class="tab-content">
+    <div class="tab-pane active" id="all">
+      <%= render @clips %>
+    </div>
+    <div class="tab-pane" id="exams">
+      <%= render @clip_exams %>
+    </div>
+    <div class="tab-pane" id="reports">
+      <%= render @clip_reports %>
+    </div>
+    <div class="tab-pane" id="notes">
+      <%= render @clip_notes %>
+    </div>
+  </div>
+</div>

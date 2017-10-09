@@ -2,7 +2,7 @@ class ExamsController < ApplicationController
 
   def new
     @exam = Exam.new
-    @exam.items.build
+    @exam.exam_items.build
     @subject = Subject.new
     @affiliation = Affiliation.new
   end
@@ -42,7 +42,11 @@ class ExamsController < ApplicationController
 
   def show
     @exam = Exam.find(params[:id])
-    @item = Item.find_by(exam_id: @exam.id)
+    @exam_items = ExamItem.where(exam_id: @exam.id)
+    @exam_comment = ExamComment.new
+    exam_comments = ExamComment.where(exam_id: @exam.id)
+    @exam_parent_comments = exam_comments.where(status: 0)
+    @exam_child_comments = exam_comments.where(status: 1)
   end
 
   def affiliation_already_exists(affiliation)
@@ -64,6 +68,6 @@ class ExamsController < ApplicationController
 
   def exam_create_params
     params.require(:exam).permit(:title, :taken_date, :explanation, :affiliation_id, :subject_id,
-        items_attributes:[:file, :note_id, :report_id, :user_id])
+        exam_items_attributes:[:exam_file])
   end
 end

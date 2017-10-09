@@ -11,27 +11,74 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170923073245) do
+ActiveRecord::Schema.define(version: 20171006143137) do
 
   create_table "affiliations", force: :cascade do |t|
     t.string   "college",    limit: 255, default: "", null: false
     t.string   "department", limit: 255, default: "", null: false
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
-    t.string   "course",     limit: 255, default: ""
+    t.string   "course",     limit: 255, default: "", null: false
   end
 
   add_index "affiliations", ["college", "department", "course"], name: "affiliation_unique_again", unique: true, using: :btree
 
+  create_table "clip_exams", force: :cascade do |t|
+    t.integer  "user_id",    limit: 4, null: false
+    t.integer  "exam_id",    limit: 4, null: false
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  add_index "clip_exams", ["exam_id"], name: "index_clip_exams_on_exam_id", using: :btree
+  add_index "clip_exams", ["user_id"], name: "index_clip_exams_on_user_id", using: :btree
+
+  create_table "clip_notes", force: :cascade do |t|
+    t.integer  "user_id",    limit: 4, null: false
+    t.integer  "note_id",    limit: 4, null: false
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  add_index "clip_notes", ["note_id"], name: "index_clip_notes_on_note_id", using: :btree
+  add_index "clip_notes", ["user_id"], name: "index_clip_notes_on_user_id", using: :btree
+
+  create_table "clip_reports", force: :cascade do |t|
+    t.integer  "user_id",    limit: 4, null: false
+    t.integer  "report_id",  limit: 4, null: false
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  add_index "clip_reports", ["report_id"], name: "index_clip_reports_on_report_id", using: :btree
+  add_index "clip_reports", ["user_id"], name: "index_clip_reports_on_user_id", using: :btree
+
+  create_table "clipables", force: :cascade do |t|
+    t.integer  "content_id",     limit: 4,   null: false
+    t.string   "content_type",   limit: 255, null: false
+    t.integer  "affiliation_id", limit: 4,   null: false
+    t.integer  "subject_id",     limit: 4,   null: false
+    t.integer  "user_id",        limit: 4,   null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
   create_table "exam_comments", force: :cascade do |t|
     t.text     "text",       limit: 65535,             null: false
-    t.integer  "parent_id",  limit: 4,                 null: false
-    t.integer  "like",       limit: 4,     default: 0
+    t.integer  "parent_id",  limit: 4,     default: 0, null: false
+    t.integer  "like",       limit: 4,     default: 0, null: false
     t.integer  "exam_id",    limit: 4,                 null: false
     t.integer  "user_id",    limit: 4,                 null: false
     t.datetime "created_at",                           null: false
     t.datetime "updated_at",                           null: false
     t.integer  "status",     limit: 4,                 null: false
+  end
+
+  create_table "exam_items", force: :cascade do |t|
+    t.binary   "exam_file",  limit: 65535, null: false
+    t.integer  "exam_id",    limit: 4,     null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
   end
 
   create_table "exams", force: :cascade do |t|
@@ -55,25 +102,22 @@ ActiveRecord::Schema.define(version: 20170923073245) do
     t.integer  "user_id",        limit: 4
   end
 
-  create_table "items", force: :cascade do |t|
-    t.binary   "file",       limit: 65535, null: false
-    t.integer  "exam_id",    limit: 4,     null: false
-    t.integer  "report_id",  limit: 4,     null: false
-    t.integer  "note_id",    limit: 4,     null: false
-    t.integer  "user_id",    limit: 4,     null: false
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
-  end
-
   create_table "note_comments", force: :cascade do |t|
     t.text     "text",       limit: 65535,             null: false
-    t.integer  "parent_id",  limit: 4,                 null: false
-    t.integer  "like",       limit: 4,     default: 0
+    t.integer  "parent_id",  limit: 4,     default: 0, null: false
+    t.integer  "like",       limit: 4,     default: 0, null: false
     t.integer  "note_id",    limit: 4,                 null: false
     t.integer  "user_id",    limit: 4,                 null: false
     t.datetime "created_at",                           null: false
     t.datetime "updated_at",                           null: false
     t.integer  "status",     limit: 4,                 null: false
+  end
+
+  create_table "note_items", force: :cascade do |t|
+    t.binary   "note_file",  limit: 65535, null: false
+    t.integer  "note_id",    limit: 4,     null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
   end
 
   create_table "notes", force: :cascade do |t|
@@ -89,13 +133,20 @@ ActiveRecord::Schema.define(version: 20170923073245) do
 
   create_table "report_comments", force: :cascade do |t|
     t.text     "text",       limit: 65535,             null: false
-    t.integer  "parent_id",  limit: 4,                 null: false
-    t.integer  "like",       limit: 4,     default: 0
+    t.integer  "parent_id",  limit: 4,     default: 0, null: false
+    t.integer  "like",       limit: 4,     default: 0, null: false
     t.integer  "report_id",  limit: 4,                 null: false
     t.integer  "user_id",    limit: 4,                 null: false
     t.datetime "created_at",                           null: false
     t.datetime "updated_at",                           null: false
     t.integer  "status",     limit: 4,                 null: false
+  end
+
+  create_table "report_items", force: :cascade do |t|
+    t.binary   "report_file", limit: 65535
+    t.integer  "report_id",   limit: 4,     null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
   end
 
   create_table "reports", force: :cascade do |t|

@@ -2,6 +2,7 @@ class ReportsController < ApplicationController
 
   def new
     @report = Report.new
+    @report.report_items.build
     @subject = Subject.new
     @affiliation = Affiliation.new
   end
@@ -36,12 +37,17 @@ class ReportsController < ApplicationController
     report.affiliation_id = new_affiliation.id
     report.subject_id = new_subject.id
     report.user_id = current_user.id
+    binding.pry
     report.save
   end
 
   def show
     @report = Report.find(params[:id])
-    @item = Item.find_by(report_id: @report.id)
+    @report_items = ReportItem.where(report_id: @report.id)
+    @report_comment = ReportComment.new
+    report_comments = ReportComment.where(report_id: @report.id)
+    @report_parent_comments = report_comments.where(status: 0)
+    @report_child_comments = report_comments.where(status: 1)
   end
 
   def affiliation_already_exists(affiliation)
@@ -62,8 +68,8 @@ class ReportsController < ApplicationController
   end
 
   def report_create_params
-    params.require(:report).permit(:title, :taken_date, :explanation, :affiliation_id, :subject_id,
-        items_attributes:[:file, :note_id, :exam_id, :user_id])
+    params.require(:report).permit(:title, :deadline, :explanation, :affiliation_id, :subject_id,
+        report_items_attributes:[:report_file])
   end
 
 end

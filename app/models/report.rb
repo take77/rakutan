@@ -1,11 +1,12 @@
 class Report < ActiveRecord::Base
-  belongs_to :user
+  has_many :user, through: :clip_reports
+  has_many :clip_reports
   belongs_to :subject
   belongs_to :affiliation
   has_many :report_comments
-  has_many :items
+  has_many :report_items, dependent: :destroy
   has_one :feed_content, as: :content, dependent: :destroy
-  accepts_nested_attributes_for :items, allow_destroy: true
+  accepts_nested_attributes_for :report_items, allow_destroy: true
   after_create :create_feed_content
 
   private

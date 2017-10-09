@@ -18,13 +18,13 @@
         </div>
       </div>
 
-      <div id="item_fields">
-        <%= f.fields_for :items do |i| %>
-          <%= render 'item_fields', f: i %>
+      <div id="report_item_fields">
+        <%= f.fields_for :report_items do |i| %>
+          <%= render 'report_item_fields', f: i %>
         <% end %>
       </div>
 
-      <%= link_to_add_association "ファイルを追加", f, :items, class:"btn btn-primary", data:{association_insertion_node: "#item_fields", association_insertion_method: "append"}, partial: "item_fields" %>
+      <%= link_to_add_association "ファイルを追加", f, :report_items, class:"btn btn-primary", data:{association_insertion_node: "#report_item_fields", association_insertion_method: "append"}, partial: "report_item_fields" %>
 
       <div class="form-group">
         <div class="col-lg-6">
