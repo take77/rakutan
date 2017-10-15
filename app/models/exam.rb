@@ -1,6 +1,6 @@
 class Exam < ActiveRecord::Base
-  has_many :user, through: :clip_exams
-  has_many :clip_exams
+
+  belongs_to :user
   belongs_to :subject
   belongs_to :affiliation
   has_many :exam_comments, dependent: :destroy

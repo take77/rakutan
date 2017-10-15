@@ -1,0 +1,7 @@
+<% if commentable.like_user(current_user.id, check = 0) != 0 %>
+  <%= link_to 'いいねを解除', commentable_comment_like_path(commentable, comment_like), method: :delete %>
+  <%= commentable.comment_likes_count %>
+<% else %>
+  <%= link_to 'いいね', "/commentables/#{comment.commentable.id}/comment_likes" , method: :post %>
+  <%= commentable.comment_likes_count %>
+  <% end %>

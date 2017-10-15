@@ -12,8 +12,13 @@
     </ul>
 
     <div>
-      <%= link_to 'お気に入りに追加', add_note_path(note), method: :post %>
+      <% if @clip == 0 %>
+        <%= link_to 'お気に入りに追加', "/feed_contents/#{@note.feed_content.id}/clips", method: :post %>
+      <% else %>
+        <%= link_to 'お気に入りから削除', feed_content_clip_path(@note.feed_content, @clip), method: :delete %>
+      <% end %>
     </div>
+
 
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 

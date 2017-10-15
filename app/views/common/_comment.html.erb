@@ -4,6 +4,15 @@
     <div class="form-group">
       <%= parent_comment.user.nickname %>
       <%= parent_comment.text %>
+
+      <% if parent_comment.comment.like_user(current_user.id) %>
+        <%= link_to 'いいねを解除', comment_comment_like_path(parent_comment, parent_comment.comment), method: :delete %>
+        <%= parent_comment.comment.comment_likes_count %>
+      <% else %>
+        <%= link_to 'いいね', comment_comment_likes_path(parent_comment, parent_comment.comment), method: :post %>
+        <%= parent_comment.comment.comment_likes_count %>
+      <% end %>
+
       <a class="btn-xs btn-primary" data-toggle="collapse" href="#comment<%= parent_comment.id %> ">
         返信
       </a>
@@ -18,6 +27,14 @@
 
         <%= hold_comment.user.nickname %>
         <%= hold_comment.text %>
+
+      <% if hold_comment.comment.like_user(current_user.id) %>
+        <%= link_to 'いいねを解除', comment_comment_like_path(hold_comment, hold_comment.comment), method: :delete %>
+        <%= hold_comment.comment.comment_likes_count %>
+      <% else %>
+        <%= link_to 'いいね', comment_comment_likes_path(hold_comment, hold_comment.comment), method: :post %>
+        <%= hold_comment.comment.comment_likes_count %>
+      <% end %>
 
       <% end %>
     </div>

@@ -47,6 +47,8 @@ class ExamsController < ApplicationController
     exam_comments = ExamComment.where(exam_id: @exam.id)
     @exam_parent_comments = exam_comments.where(status: 0)
     @exam_child_comments = exam_comments.where(status: 1)
+    exam = @exam
+    @clip = clip_check(exam, clip = 0)
   end
 
   def affiliation_already_exists(affiliation)
@@ -55,6 +57,17 @@ class ExamsController < ApplicationController
 
   def subject_already_exists(subject)
     subject = Subject.find_by(:name => subject.name, :professor => subject.professor, :affiliation_id => subject.affiliation_id)
+  end
+
+  def clip_check(exam, a_clip)
+    exam_id = exam.id
+    pre_feed_content = FeedContent.where(user_id: current_user.id)
+    feed_content_id = pre_feed_content.find_by(content_id: exam_id).id
+    if Clip.find_by(feed_content_id: feed_content_id)
+      a_clip = Clip.find_by(feed_content_id: feed_content_id).id
+    else
+      a_clip = 0
+    end
   end
 
   private

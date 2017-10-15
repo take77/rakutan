@@ -1,6 +1,6 @@
 class Note < ActiveRecord::Base
-  has_many :user, through: :clip_notes
-  has_many :clip_notes
+
+  belongs_to :user
   belongs_to :subject
   belongs_to :affiliation
   has_many :note_comments

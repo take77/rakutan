@@ -37,7 +37,6 @@ class ReportsController < ApplicationController
     report.affiliation_id = new_affiliation.id
     report.subject_id = new_subject.id
     report.user_id = current_user.id
-    binding.pry
     report.save
   end
 
@@ -48,6 +47,8 @@ class ReportsController < ApplicationController
     report_comments = ReportComment.where(report_id: @report.id)
     @report_parent_comments = report_comments.where(status: 0)
     @report_child_comments = report_comments.where(status: 1)
+    exam = @exam
+    @clip = clip_check(report, clip = 0)
   end
 
   def affiliation_already_exists(affiliation)
@@ -56,6 +57,16 @@ class ReportsController < ApplicationController
 
   def subject_already_exists(subject)
     subject = Subject.find_by(:name => subject.name, :professor => subject.professor, :affiliation_id => subject.affiliation_id)
+  end
+
+  def clip_check(report, a_clip)
+    report_id = reprot.id
+    feed_content_id = FeedContent.find_by(content_id: report_id).id
+    if Clip.find_by(feed_content_id: feed_content_id)
+      a_clip = Clip.find_by(feed_content_id: feed_content_id).id
+    else
+      a_clip = 0
+    end
   end
 
   private

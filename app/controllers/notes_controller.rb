@@ -47,6 +47,8 @@ class NotesController < ApplicationController
     note_comments = NoteComment.where(note_id: @note.id)
     @note_parent_comments = note_comments.where(status: 0)
     @note_child_comments = note_comments.where(status: 1)
+    notr = @note
+    @clip = clip_check(note, clip = 0)
   end
 
   def affiliation_already_exists(affiliation)
@@ -55,6 +57,16 @@ class NotesController < ApplicationController
 
   def subject_already_exists(subject)
     subject = Subject.find_by(:name => subject.name, :professor => subject.professor, :affiliation_id => subject.affiliation_id)
+  end
+
+  def clip_check(note, a_clip)
+    note_id = note.id
+    feed_content_id = FeedContent.find_by(content_id: note_id).id
+    if Clip.find_by(feed_content_id: feed_content_id)
+      a_clip = Clip.find_by(feed_content_id: feed_content_id).id
+    else
+      a_clip = 0
+    end
   end
 
   private

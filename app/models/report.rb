@@ -1,6 +1,6 @@
 class Report < ActiveRecord::Base
-  has_many :user, through: :clip_reports
-  has_many :clip_reports
+
+  belongs_to :user
   belongs_to :subject
   belongs_to :affiliation
   has_many :report_comments

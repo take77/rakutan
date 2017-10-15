@@ -54,5 +54,6 @@ group :development do
   gem 'rmagick'
   gem 'rghost'
   gem 'cocoon'
+  gem 'counter_culture', '~> 1.8'
 end
 

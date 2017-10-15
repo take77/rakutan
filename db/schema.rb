@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171006143137) do
+ActiveRecord::Schema.define(version: 20171014073136) do
 
   create_table "affiliations", force: :cascade do |t|
     t.string   "college",    limit: 255, default: "", null: false
@@ -23,44 +23,30 @@ ActiveRecord::Schema.define(version: 20171006143137) do
 
   add_index "affiliations", ["college", "department", "course"], name: "affiliation_unique_again", unique: true, using: :btree
 
-  create_table "clip_exams", force: :cascade do |t|
+  create_table "clips", force: :cascade do |t|
+    t.integer  "user_id",         limit: 4, null: false
+    t.integer  "feed_content_id", limit: 4, null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
+  add_index "clips", ["feed_content_id"], name: "index_clips_on_feed_content_id", using: :btree
+  add_index "clips", ["user_id"], name: "index_clips_on_user_id", using: :btree
+
+  create_table "comment_likes", force: :cascade do |t|
+    t.integer  "comment_id", limit: 4, null: false
     t.integer  "user_id",    limit: 4, null: false
-    t.integer  "exam_id",    limit: 4, null: false
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
   end
 
-  add_index "clip_exams", ["exam_id"], name: "index_clip_exams_on_exam_id", using: :btree
-  add_index "clip_exams", ["user_id"], name: "index_clip_exams_on_user_id", using: :btree
-
-  create_table "clip_notes", force: :cascade do |t|
-    t.integer  "user_id",    limit: 4, null: false
-    t.integer  "note_id",    limit: 4, null: false
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
-  end
-
-  add_index "clip_notes", ["note_id"], name: "index_clip_notes_on_note_id", using: :btree
-  add_index "clip_notes", ["user_id"], name: "index_clip_notes_on_user_id", using: :btree
-
-  create_table "clip_reports", force: :cascade do |t|
-    t.integer  "user_id",    limit: 4, null: false
-    t.integer  "report_id",  limit: 4, null: false
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
-  end
-
-  add_index "clip_reports", ["report_id"], name: "index_clip_reports_on_report_id", using: :btree
-  add_index "clip_reports", ["user_id"], name: "index_clip_reports_on_user_id", using: :btree
-
-  create_table "clipables", force: :cascade do |t|
-    t.integer  "content_id",     limit: 4,   null: false
-    t.string   "content_type",   limit: 255, null: false
-    t.integer  "affiliation_id", limit: 4,   null: false
-    t.integer  "subject_id",     limit: 4,   null: false
-    t.integer  "user_id",        limit: 4,   null: false
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+  create_table "comments", force: :cascade do |t|
+    t.integer  "commentable_id",      limit: 4
+    t.string   "commentable_type",    limit: 255
+    t.integer  "user_id",             limit: 4,               null: false
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
+    t.integer  "comment_likes_count", limit: 4,   default: 0, null: false
   end
 
   create_table "exam_comments", force: :cascade do |t|

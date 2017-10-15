@@ -12,7 +12,11 @@
     </ul>
 
     <div>
-      <%= link_to 'お気に入りに追加', add_report_path(report), method: :post %>
+      <% if @clip == 0 %>
+        <%= link_to 'お気に入りに追加', "/feed_contents/#{@report.feed_content.id}/clips", method: :post %>
+      <% else %>
+        <%= link_to 'お気に入りから削除', feed_content_clip_path(@report.feed_content, @clip), method: :delete %>
+      <% end %>
     </div>
 
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
